@@ -7,4 +7,5 @@ A python - flask based web application where
 5) SQLLite database is used SQLAlchemy mediator
 6) Webpages - HTML, CSS, Javascript
 7) No third-party involved, totally developed and controlled by Dibyajyoti Dhar, BCSE-III, Jadavpur University
+<br>
 Get a glance - https://youtu.be/AfJ3N5ux45Y
