@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  </head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+  
+   <body>
+    {{msg}}
+    {{idt}}
+    {{psw}}
+      
+  <div class="container">
+      <h3>
+            Users <a href = "/">Login</a>
+         </h3>
+         
+         <hr/>
+         
+         
+         <h3>Users (<a href = "/REG">Add User
+            </a>)</h3>    
+      <table class="table table-dark">
+         <thead>
+            <tr>
+               <th>FirstName</th>
+               <th>LastName</th>
+               <th>UserName</th>
+               <th>City</th>
+               <th>State</th>
+               <th>Zip</th>
+               <th>Email</th>
+               <th>Password</th>
+
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for u in users %}
+               <tr>
+                  <td>{{ u.firstname }}</td>
+                  <td>{{ u.lastname }}</td>
+                  <td>{{ u.username }}</td>
+                  <td>{{ u.city }}</td>
+                  <td>{{ u.state }}</td>
+                  <td>{{ u.zip }}</td>
+                  <td>{{ u.email }}</td>
+                  <td>{{ u.password }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   </body>
+</html>

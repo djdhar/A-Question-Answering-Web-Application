@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<div class="container m-2">
+
+    <div class="panel-body">
+            <h4>Hello {{firstname}}!!! Post your answer!!!</h4>
+            <h2>{{ask.question}}</h2>
+
+    <div class="row m-2">
+    <form method="POST"> 
+            <input hidden="hidden" name="myquestion" type="text" value="{{ask.question}}">
+            <input hidden="hidden" name="myemail" value="{{email}}">
+            <div class="form-row">
+            <textarea class="form-control" id="text" name="ansarea" rows="10"></textarea>  
+            </div>  
+            <br>
+    <button class="btn btn-primary" type="submit">Answer</button>
+    </form>
+    </div>
+
+    <div class="row">
+<table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">{{ask.question}}</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for myans in anslist %}
+            <tr>
+                    
+                <td>{{myans}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+      <div>
+         <h5> <a href="/">Logout</a> </h5>
+      </div>
+    </div>
+    <br>
+    <br>
+    <small>
+      Developed by Dibyajyoti Dhar,UG, BCSE-III, Roll-001710501067, Jadavpur University
+    </small>
+</div>
+</div>
