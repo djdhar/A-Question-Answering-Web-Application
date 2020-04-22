@@ -17,7 +17,7 @@
             <input hidden="hidden" name="myquestion" type="text" value="{{ask.question}}">
             <input hidden="hidden" name="myemail" value="{{email}}">
             <div class="form-row">
-            <textarea class="form-control" id="text" name="ansarea" rows="10"></textarea>  
+            <textarea class="form-control" id="text" name="ansarea" rows="10" required></textarea>  
             </div>  
             <br>
     <button class="btn btn-primary" type="submit">Answer</button>
@@ -34,10 +34,12 @@
         </thead>
         <tbody>
 
-            {% for myans in anslist %}
+            {% for myans in list_ans_details %}
             <tr>
                     
-                <td>{{myans}}</td>
+                <td> <p style="color:red"><b>@{{myans.username}}</b></p> 
+                    <p style="color:blue">{{myans.date}}</p>
+                     {{myans.answer}}</td>
             </tr>
             {% endfor %}
 
