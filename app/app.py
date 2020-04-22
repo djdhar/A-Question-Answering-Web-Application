@@ -7,6 +7,13 @@ from dbgen import User
 from dbgen import Question
 import time
 from time import sleep
+import datetime
+class Answers:
+
+  def __init__(self, answer="", usernam="", date=""):
+    self.answer = answer
+    self.username = usernam
+    self.date = date
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user.sqlite"
@@ -19,22 +26,42 @@ def READ():
         myquestion = request.form['myquestion']
         print(myquestion)
         myuser = User.query.filter_by(email=email).first()
+        username = myuser.username
         ask = Question.query.filter_by(question=str(myquestion)).first()
         questions = Question.query.all()
         print(questions[0].question)
         print(ask)
         list_ans = ask.answers.split('\u0001')
+        if(list_ans==['']):
+            list_ans=[]
+        print(list_ans)
+        list_ans_details = []
+        for fullans in list_ans:
+            if(fullans!=''):
+                ans_part, username_part, date_part = fullans.split('\u0002')
+                ans_details = Answers(ans_part,username_part,date_part)
+                list_ans_details.append(ans_details)
         if myquestion !="":
-            return render_template('answers.html', ask=ask,email=email,firstname=myuser.firstname, anslist=list_ans)
+            return render_template('answers.html', ask=ask,email=email,firstname=myuser.firstname,username=username, anslist=list_ans,list_ans_details=list_ans_details)
     except:
         ans = request.form['ansarea']
         myquestion = request.form['myquestion']
         email = request.form['myemail']
         myuser = User.query.filter_by(email=email).first()
         ask = Question.query.filter_by(question=myquestion).first()
+        username = myuser.username
+        if ans=="":
+            return
+        date = str(datetime.datetime.now().strftime("%I:%M%p %B %d, %Y"))
+        ans=ans+'\u0002'+username+'\u0002'+date
+
         prevans = ask.answers
         print(prevans)
-        newans = prevans+"\u0001"+ans
+        newans=""
+        if prevans=="":
+            newans=ans
+        else:
+            newans = prevans+"\u0001"+ans
         print("New Ans = "+newans)
         db.session.query(Question).filter_by(question=myquestion).update({"answers":newans})
         db.session.commit()
@@ -44,8 +71,15 @@ def READ():
         #db.session.commit()
         ask2 = db.session.query(Question).filter_by(question=myquestion).first()
         print("Answer = "+ask2.answers)
-        list_ans = ask2.answers.split('\u0001') 
-        return render_template('answers.html', ask=ask2,email=email,firstname=myuser.firstname, anslist=list_ans)
+        list_ans = ask2.answers.split('\u0001')
+        list_ans_details = []
+        for fullans in list_ans:
+            if(fullans!=''):
+                ans_part, username_part, date_part = fullans.split('\u0002')
+                ans_details = Answers(ans_part,username_part,date_part)
+                list_ans_details.append(ans_details)
+
+        return render_template('answers.html', ask=ask2,email=email,firstname=myuser.firstname, username=username, anslist=list_ans, list_ans_details=list_ans_details)
 
 
 
@@ -62,6 +96,7 @@ def postquestion():
         garbage=0
     questions = Question.query.all()
     return render_template('profile.html', user=myuser, questions=questions)
+
 
 @app.route('/profile')
 def profile():
