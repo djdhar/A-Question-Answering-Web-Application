@@ -4,7 +4,7 @@ A python - flask based web application where
 2) A register user can login.
 3) After login, the user can post any question(s) anonymously
 4) Any user can answer the posted question(s). Their identity will be public.
-5) SQLLite database is used SQLAlchemy mediator
+5) SQLite database is used SQLAlchemy mediator
 6) Webpages - HTML, CSS, Javascript
 7) No third-party involved, totally developed and controlled by Dibyajyoti Dhar, BCSE-III, Jadavpur University
 <br>
